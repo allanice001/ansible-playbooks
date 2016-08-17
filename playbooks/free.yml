@@ -1,0 +1,6 @@
+- name: Check Free ram
+  hosts: allan
+  remote_user: root
+  tasks:
+    - name: check free memory
+      command: free -m  
