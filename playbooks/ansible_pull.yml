@@ -8,6 +8,9 @@
     workdir: '/opt/ansible/local'
     repo_url: 'git://github.com/allanice001/ansible-playbooks.git'
   tasks:
+    - name: Add ansible ppa
+      apt_repository: repo='ppa:ansible/ansible' state=present
+
     - name: Install ansible
       apt: pkg=ansible state=installed
 
