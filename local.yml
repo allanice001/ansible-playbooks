@@ -1,2 +1,2 @@
 ---
-- include playbooks/free.yml
+- include: playbooks/free.yml
