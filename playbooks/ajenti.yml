@@ -1,0 +1,28 @@
+---
+- hosts: ajenti
+  remote_user: root
+  
+  tasks:
+  - name: ensure python-software-properties is installed
+    apt: pkg=python-software-properties state=installed
+
+  - name: add ajenti apt key
+    apt_key: url=http://repo.ajenti.org/debian/key state=present
+
+  - name: add ajenti repository
+    apt_repository: repo='deb http://repo.ajenti.org/ng/debian main main ubuntu' state=present
+
+  - name: update apt caches
+    apt: update_cache=yes
+
+  - name: install ajenti
+    apt: pkg=ajenti state=installed force=yes
+
+  - name: enable ajenti plugins
+    apt: pkg=ajenti-v-php-fpm,ajenti-v-python-gunicorn,ajenti-v-mysql state=installed
+    notify:
+    - restart ajenti
+
+  handlers:
+  - name: restart ajeni
+    service: name=ajenti state=restarted
