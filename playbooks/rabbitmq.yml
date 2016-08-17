@@ -9,6 +9,9 @@
   - name: ensure python-software-properties is installed
     apt: pkg=python-software-properties state=installed
 
+  - name: add rabbitmq apt key
+    apt_key: url=https://www.rabbitmq.com/rabbitmq-release-signing-key.asc state=present 
+
   - name: add rabbitmq official apt repository
     apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
 
@@ -34,9 +37,6 @@
 
   - name: ensure vhost /helmynsz is present
     rabbitmq_vhost: name=/helmynsz state=present
-
-  - name: set federation local-username
-    rabbitmq_parameter: component=federation name=local-username value='"user1"' state=present
 
   handlers:
   - name: restart rabbitmq

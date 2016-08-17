@@ -3,4 +3,6 @@
   remote_user: root
   tasks:
     - name: check free memory
-      command: free -m  
+      shell: free -m
+      register: free
+    - debug: var=free.stdout_lines
